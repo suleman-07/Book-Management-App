@@ -1,4 +1,7 @@
 // 📁 File: app.js
+let currentPage = 1;
+const booksPerPage = 5;
+
 
 // ----------- Book Class -----------
 class Book {
@@ -154,7 +157,12 @@ async function updateBookAsync(bookId, updatedData) {
 function displayBooks(list = books) {
   const container = document.getElementById("bookList");
   container.innerHTML = "";
-  list.forEach(book => {
+
+  const start = (currentPage - 1) * booksPerPage;
+  const end = start + booksPerPage;
+  const paginatedBooks = list.slice(start, end);
+
+  paginatedBooks.forEach(book => {
     const li = document.createElement("li");
     li.innerHTML = `
       <strong>${book.title}</strong> by ${book.author}<br>
@@ -164,7 +172,11 @@ function displayBooks(list = books) {
     `;
     container.appendChild(li);
   });
+
+  // Update page info
+  document.getElementById("pageInfo").innerText = `Page ${currentPage}`;
 }
+
 
 function promptUpdate(id) {
   const newTitle = prompt("New Title:");
@@ -227,6 +239,21 @@ function bindEvents() {
     const filtered = genre ? getBooksByGenre(genre) : books;
     displayBooks(filtered);
   });
+  document.getElementById("prevPage").addEventListener("click", () => {
+  if (currentPage > 1) {
+    currentPage--;
+    displayBooks();
+  }
+});
+
+document.getElementById("nextPage").addEventListener("click", () => {
+  const totalPages = Math.ceil(books.length / booksPerPage);
+  if (currentPage < totalPages) {
+    currentPage++;
+    displayBooks();
+  }
+});
+
 
   document.getElementById("exportJsonBtn").addEventListener("click", exportToJson);
 }

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>📚 Book Manager App</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+
+</head>
+<body>
+
+  <div class="container">
+    <div class="main-content">
+      <h1>📚 Book Manager</h1>
+
+      <!-- Add Book Form -->
+      <form id="bookForm">
+        <div class="form-group">
+          <input name="title" placeholder="Title" required />
+          <input name="author" placeholder="Author" required />
+          <input name="genre" placeholder="Genre" required />
+          <input name="publishedYear" type="number" placeholder="Published Year" required />
+          <input name="rating" type="number" step="0.1" placeholder="Rating" min="0" max="5" required />
+        </div>
+        <button type="submit">➕ Add Book</button>
+      </form>
+
+      <!-- Filters & Controls -->
+      <div class="controls">
+        <input id="searchInput" placeholder="Search by title or author..." />
+        <select id="sortSelect">
+          <option value="publishedYear">Sort by Year</option>
+          <option value="rating">Sort by Rating</option>
+          <option value="title">Sort by Title</option>
+        </select>
+        <select id="genreFilter">
+          <option value="">All Genres</option>
+          <option value="Fiction">Fiction</option>
+          <option value="Fantasy">Fantasy</option>
+          <option value="Self-help">Self-help</option>
+        </select>
+        <button id="exportJsonBtn">📤 Export JSON</button>
+        <button onclick="saveToStorage('local')">💾 Save to LocalStorage</button>
+        <button onclick="saveToStorage('session')">💾 Save to SessionStorage</button>
+        <button onclick="loadFromStorage('local')">📥 Load from LocalStorage</button>
+        <button onclick="loadFromStorage('session')">📥 Load from SessionStorage</button>
+        <button onclick="clearStorage('local')">🗑️ Clear LocalStorage</button>
+        <button onclick="clearStorage('session')">🗑️ Clear SessionStorage</button>
+      </div>
+
+      <p id="statusMessage"></p>
+
+      <!-- Book List -->
+      <ul id="bookList"></ul>
+    </div>
+
+    <!-- Sidebar for Genre Count -->
+    <div class="sidebar">
+      <div id="genreSidebar"></div>
+    </div>
+  </div>
+
+  <!-- Link JavaScript File -->
+  <script src="app.js"></script>
+</body>
+</html>

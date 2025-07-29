@@ -220,6 +220,17 @@
       background-color: rgba(255, 193, 7, 0.2);
       color: var(--warning-color);
     }
+    body.dark-mode {
+  background-color: #121212;
+  color: #f0f0f0;
+}
+
+button {
+  margin: 5px;
+  padding: 8px;
+  cursor: pointer;
+}
+
     
     @media (max-width: 768px) {
       .container {
@@ -234,4 +245,5 @@
         grid-template-columns: 1fr;
       }
     }
+
  

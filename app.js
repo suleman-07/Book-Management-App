@@ -257,3 +257,30 @@ document.getElementById("nextPage").addEventListener("click", () => {
 
   document.getElementById("exportJsonBtn").addEventListener("click", exportToJson);
 }
+
+// ----------- Dark Mode Toggle -----------
+// 🌗 Dark Mode Toggle
+function applyDarkMode(isDark) {
+  if (isDark) {
+    document.body.classList.add("dark-mode");
+  } else {
+    document.body.classList.remove("dark-mode");
+  }
+}
+
+function toggleDarkMode() {
+  const isDark = document.body.classList.toggle("dark-mode");
+  localStorage.setItem("darkMode", isDark ? "enabled" : "disabled");
+}
+
+// On Page Load - apply saved mode
+window.addEventListener("load", () => {
+  const savedMode = localStorage.getItem("darkMode");
+  applyDarkMode(savedMode === "enabled");
+
+  // Button Event
+  const toggleBtn = document.getElementById("toggleModeBtn");
+  if (toggleBtn) {
+    toggleBtn.addEventListener("click", toggleDarkMode);
+  }
+});
